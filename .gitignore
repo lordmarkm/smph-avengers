@@ -1,3 +1,42 @@
+# generated files
+bin
+target
+webapp-build
+generated
+overlays
+id_file
+selenium_standalone_*
+*.log
+lib
+log
+mynt-repository
+mynt-repository-temp
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+#GIT Orig files
+*.orig
+
 # Compiled class file
 *.class
 
