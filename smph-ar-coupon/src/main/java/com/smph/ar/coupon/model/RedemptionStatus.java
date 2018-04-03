@@ -1,4 +1,4 @@
-package com.smph.coupon.model;
+package com.smph.ar.coupon.model;
 
 public enum RedemptionStatus {
 

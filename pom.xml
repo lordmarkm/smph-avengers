@@ -23,6 +23,7 @@
   <modules>
     <module>smph-ar-app</module>
     <module>smph-ar-coupon</module>
+    <module>smph-ar-security</module>
   </modules>
 
 </project>

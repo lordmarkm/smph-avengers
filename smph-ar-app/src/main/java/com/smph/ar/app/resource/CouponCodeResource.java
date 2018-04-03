@@ -1,4 +1,4 @@
-package com.sm.ar.app.resource;
+package com.smph.ar.app.resource;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.sm.ar.app.dto;
+package com.smph.ar.app.dto;
 
 import org.springframework.core.style.ToStringCreator;
 

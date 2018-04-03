@@ -9,8 +9,7 @@ selenium_standalone_*
 *.log
 lib
 log
-mynt-repository
-mynt-repository-temp
+db
 
 ### STS ###
 .apt_generated

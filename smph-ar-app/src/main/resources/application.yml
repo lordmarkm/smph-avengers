@@ -2,6 +2,17 @@ endpoints:
   shutdown:
     enabled: true
 
+spring:
+  datasource:
+    url: jdbc:h2:file:./db/h2-smph-ar
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /db
+
 management:
   security:
     enabled: false

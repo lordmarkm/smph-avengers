@@ -7,3 +7,4 @@ services:
     container_name: sm-ar-avengers
     volumes:
     - "/home/mbmartinez/dist/log:/log"
+    - "/home/mbmartinez/dist/h2-smph-ar:/h2-smph-ar"

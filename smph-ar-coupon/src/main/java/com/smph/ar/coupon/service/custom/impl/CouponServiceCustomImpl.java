@@ -1,22 +1,22 @@
-package com.smph.coupon.service.custom.impl;
+package com.smph.ar.coupon.service.custom.impl;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.mynt.core.jpa.service.MyntJpaServiceCustomImpl;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
-import com.smph.coupon.dto.CouponInfo;
-import com.smph.coupon.model.Coupon;
-import com.smph.coupon.service.CouponService;
-import com.smph.coupon.service.custom.CouponServiceCustom;
-import static com.smph.coupon.model.QCoupon.coupon;
-import static com.smph.coupon.model.RedemptionStatus.*;
+import static com.smph.ar.coupon.model.RedemptionStatus.REDEEMED;
+import static com.smph.ar.coupon.model.RedemptionStatus.VALID;
+import static com.smph.ar.coupon.model.QCoupon.coupon;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceUnit;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import com.google.common.collect.Iterables;
+import com.mynt.core.jpa.service.MyntJpaServiceCustomImpl;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.smph.ar.coupon.dto.CouponInfo;
+import com.smph.ar.coupon.model.Coupon;
+import com.smph.ar.coupon.service.CouponService;
+import com.smph.ar.coupon.service.custom.CouponServiceCustom;
 
 public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, CouponInfo, CouponService>
     implements CouponServiceCustom {

@@ -1,19 +1,34 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>smph-ar</groupId>
     <artifactId>smph-ar</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>smph-ar-coupon-code</groupId>
-  <artifactId>smph-ar-coupon-code</artifactId>
-  <name>SM AR :: Coupon</name>
+  <artifactId>smph-ar-coupon</artifactId>
+  <name>SMPH AR :: Coupon</name>
 
   <dependencies>
     <dependency>
       <groupId>mynt</groupId>
       <artifactId>mynt-core-jpa</artifactId>
       <version>1.2</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jadira.usertype</groupId>
+          <artifactId>usertype.core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.javers</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.jadira.usertype</groupId>
+      <artifactId>usertype.core</artifactId>
+      <version>5.0.0.GA</version>
     </dependency>
   </dependencies>
 
@@ -32,7 +47,7 @@
               <outputDirectory>target/generated-sources/java</outputDirectory>
               <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
               <includes>
-                <include>com.smph.coupon.model</include>
+                <include>com.smph.ar.coupon.model</include>
               </includes>
             </configuration>
           </execution>

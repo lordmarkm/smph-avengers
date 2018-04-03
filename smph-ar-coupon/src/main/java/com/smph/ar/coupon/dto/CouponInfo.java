@@ -1,7 +1,7 @@
-package com.smph.coupon.dto;
+package com.smph.ar.coupon.dto;
 
 import com.mynt.core.dto.BaseInfo;
-import com.smph.coupon.model.RedemptionStatus;
+import com.smph.ar.coupon.model.RedemptionStatus;
 
 public class CouponInfo extends BaseInfo {
 

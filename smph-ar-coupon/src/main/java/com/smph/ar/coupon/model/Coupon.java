@@ -1,4 +1,4 @@
-package com.smph.coupon.model;
+package com.smph.ar.coupon.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,8 +1,8 @@
-package com.smph.coupon.service.custom;
+package com.smph.ar.coupon.service.custom;
 
 import com.mynt.core.jpa.service.MyntJpaServiceCustom;
-import com.smph.coupon.dto.CouponInfo;
-import com.smph.coupon.model.Coupon;
+import com.smph.ar.coupon.dto.CouponInfo;
+import com.smph.ar.coupon.model.Coupon;
 
 public interface CouponServiceCustom extends MyntJpaServiceCustom<Coupon, CouponInfo> {
 
