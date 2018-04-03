@@ -71,6 +71,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
     public String[] addCouponCodes(MultipartFile csv) {
 
         CSVReader reader = null;
+        int line = 0;
         try {
             List<String> results = Lists.newArrayList();
             reader = new CSVReader(new InputStreamReader(csv.getInputStream()));
@@ -80,6 +81,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
 
             nextline:
             while ((nextLine = reader.readNext()) != null) {
+                line++;
                 String couponCode = nextLine[0].trim();
                 if (repo.findByCouponCode(couponCode).isPresent()) {
                     results.add("Coupon code " + couponCode + " already exists. Ignored.");
@@ -101,8 +103,8 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
 
             return results.toArray(new String[] {});
         } catch (Exception e) {
-            LOG.error("IOException reading file", e);
-            return new String[] {e.getMessage()};
+            LOG.error("Error reading file", e);
+            return new String[] {"Error reading file: " + e.getMessage(), "Line number: " + line};
         } finally {
             try {
                 reader.close();
