@@ -37,8 +37,9 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
     public CouponInfo redeem(String promoCode, String uuid) {
         List<Coupon> redeemed = (List<Coupon>) repo.findAll(coupon.promoCode.eq(promoCode).and(coupon.redeemerUuid.eq(uuid)));
         if (redeemed.size() > 0) {
-            LOG.warn("Duplicate redemption attempt. promoCode={}, uuid={}", promoCode, uuid);
-            return null;
+            Coupon oldCoupon = Iterables.getFirst(redeemed, null);
+            LOG.warn("Duplicate redemption attempt. Returning old coupon code. code={}, promoCode={}, uuid={}", oldCoupon.getCouponCode(), promoCode, uuid);
+            return toDto(oldCoupon);
         }
 
         BooleanExpression predicate = coupon.status.eq(VALID)
@@ -79,13 +80,12 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
 
             String[] nextLine;
 
-            nextline:
             while ((nextLine = reader.readNext()) != null) {
                 line++;
                 String couponCode = nextLine[0].trim();
                 if (repo.findByCouponCode(couponCode).isPresent()) {
                     results.add("Coupon code " + couponCode + " already exists. Ignored.");
-                    continue nextline;
+                    continue;
                 }
 
                 Coupon newCoupon = new Coupon();
