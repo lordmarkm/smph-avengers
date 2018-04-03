@@ -5,6 +5,7 @@ import com.smph.ar.coupon.model.RedemptionStatus;
 
 public class CouponInfo extends BaseInfo {
 
+    private String couponCode;
     private String promoCode;
     private String redeemerUuid;
     private RedemptionStatus status = RedemptionStatus.VALID;
@@ -26,6 +27,12 @@ public class CouponInfo extends BaseInfo {
     }
     public void setStatus(RedemptionStatus status) {
         this.status = status;
+    }
+    public String getCouponCode() {
+        return couponCode;
+    }
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
 
 }

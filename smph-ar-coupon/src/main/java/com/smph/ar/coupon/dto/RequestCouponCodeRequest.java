@@ -1,11 +1,19 @@
-package com.smph.ar.app.dto;
+package com.smph.ar.coupon.dto;
 
-public class RequestCouponCodeResponse {
+import org.springframework.core.style.ToStringCreator;
+
+public class RequestCouponCodeRequest {
 
     private String promoCode;
     private String uuid;
-    private String couponCode;
 
+    @Override
+    public String toString() {
+        return new ToStringCreator(this)
+                .append("promoCode", promoCode)
+                .append("uuid", uuid)
+                .toString();
+    }
     public String getPromoCode() {
         return promoCode;
     }
@@ -17,12 +25,6 @@ public class RequestCouponCodeResponse {
     }
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-    public String getCouponCode() {
-        return couponCode;
-    }
-    public void setCouponCode(String couponCode) {
-        this.couponCode = couponCode;
     }
 
 }
