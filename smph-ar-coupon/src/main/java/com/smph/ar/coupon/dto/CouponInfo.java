@@ -9,6 +9,8 @@ public class CouponInfo extends BaseInfo {
     private String promoCode;
     private String redeemerUuid;
     private RedemptionStatus status = RedemptionStatus.VALID;
+    private String reward;
+    private int priority;
 
     public String getPromoCode() {
         return promoCode;
@@ -33,6 +35,18 @@ public class CouponInfo extends BaseInfo {
     }
     public void setCouponCode(String couponCode) {
         this.couponCode = couponCode;
+    }
+    public String getReward() {
+        return reward;
+    }
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
+    public int getPriority() {
+        return priority;
+    }
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
 }

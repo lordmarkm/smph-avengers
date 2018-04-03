@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Iterables;
@@ -42,7 +43,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
 
         BooleanExpression predicate = coupon.status.eq(VALID)
                 .and(coupon.promoCode.eq(promoCode));
-        PageRequest page = new PageRequest(0, 1);
+        PageRequest page = new PageRequest(0, 1, Direction.ASC, "priority");
         Page<Coupon> results = repo.findAll(predicate, page);
 
         LOG.debug("Found valid coupons for redemption: {}", results);
@@ -79,28 +80,27 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
 
             nextline:
             while ((nextLine = reader.readNext()) != null) {
-                for (String e : nextLine) {
-                    LOG.debug("Processing coupon code={}", e);
-
-                    if (repo.findByCouponCode(e).isPresent()) {
-                        results.add("Coupon code " + e + " already exists. Ignored.");
-                        continue nextline;
-                    }
-
-                    Coupon newCoupon = new Coupon();
-                    newCoupon.setCouponCode(e);
-                    newCoupon.setStatus(RedemptionStatus.VALID);
-                    newCoupon.setPromoCode("avengers");
-
-                    newCoupons.add(newCoupon);
+                String couponCode = nextLine[0].trim();
+                if (repo.findByCouponCode(couponCode).isPresent()) {
+                    results.add("Coupon code " + couponCode + " already exists. Ignored.");
+                    continue nextline;
                 }
+
+                Coupon newCoupon = new Coupon();
+                newCoupon.setCouponCode(couponCode);
+                newCoupon.setReward(nextLine[1].trim());
+                newCoupon.setPriority(Integer.parseInt(nextLine[2].trim()));
+                newCoupon.setStatus(RedemptionStatus.VALID);
+                newCoupon.setPromoCode("avengers");
+
+                newCoupons.add(newCoupon);
             }
 
             results.add("Success. New coupon codes: " + newCoupons.size());
             repo.save(newCoupons);
 
             return results.toArray(new String[] {});
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("IOException reading file", e);
             return new String[] {e.getMessage()};
         } finally {

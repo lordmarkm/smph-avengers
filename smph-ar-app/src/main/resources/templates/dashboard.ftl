@@ -55,11 +55,14 @@
     <p class="card-text">File content should look like this:
     <pre>
     <code>
-    Samplecode12345
-    Samplecode4546
-    Samplecode2222
+    Samplecode1234,Movie pass,0
+    Samplecode4546,Movie pass,0
+    Samplecode2222,Avengers mug,1
+    Samplecode1234,Free poster,2
     </code>
     </pre>
+    <p>Where the first element of the comma separated values is the coupon code, the second element is the reward, and the third element is the reward priority.
+    Lower reward priorities will be redeemed first.
     <div class="card-text">
       <form method="post" enctype="multipart/form-data" action="/coupon-code/upload">
         <div class="form-group">

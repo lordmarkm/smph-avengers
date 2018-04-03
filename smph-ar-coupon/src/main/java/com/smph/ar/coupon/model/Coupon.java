@@ -12,14 +12,20 @@ public class Coupon extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "coupon_code")
+    @Column(name = "coupon_code", nullable = false, updatable = false)
     private String couponCode;
 
-    @Column(name = "promo_code")
+    @Column(name = "promo_code", nullable = false, updatable = false)
     private String promoCode;
 
     @Column(name = "redeemer_uuid")
     private String redeemerUuid;
+
+    @Column(name = "reward", nullable = false)
+    private String reward;
+
+    @Column(name = "priority", nullable = false)
+    private int priority;
 
     @Column(name = "redemption_status")
     @Enumerated(EnumType.STRING)
@@ -56,5 +62,22 @@ public class Coupon extends BaseEntity {
     public void setCouponCode(String couponCode) {
         this.couponCode = couponCode;
     }
+
+    public String getReward() {
+        return reward;
+    }
+
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
 
 }

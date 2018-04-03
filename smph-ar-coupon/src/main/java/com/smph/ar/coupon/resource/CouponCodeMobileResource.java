@@ -1,6 +1,5 @@
 package com.smph.ar.coupon.resource;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class CouponCodeMobileResource {
         response.setPromoCode(request.getPromoCode());
         response.setUuid(request.getUuid());
         response.setCouponCode(coupon.getCouponCode());
-
+        response.setReward(coupon.getReward());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
