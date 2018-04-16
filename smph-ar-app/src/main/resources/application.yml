@@ -31,6 +31,6 @@ server:
 
 logging:
   level:
-    ROOT: info
+    ROOT: INFO
     com.smph: debug
   file: log/sm_ar.log

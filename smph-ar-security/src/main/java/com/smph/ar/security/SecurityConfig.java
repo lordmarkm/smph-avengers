@@ -63,6 +63,10 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/db/**").hasRole("ADMIN")
+
+                    //this one is for the .ssl verification, can comment out/delete when that's done
+                    .antMatchers("/.well-known/**").permitAll()
+
                     .antMatchers("/**").authenticated()
                 //this stuff for the h2 console
                 .and()
