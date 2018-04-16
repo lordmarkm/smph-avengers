@@ -21,6 +21,9 @@ public class Coupon extends BaseEntity {
     @Column(name = "redeemer_uuid")
     private String redeemerUuid;
 
+    @Column(name = "redeemer_email")
+    private String redeemerEmail;
+
     @Column(name = "reward", nullable = false)
     private String reward;
 
@@ -77,6 +80,14 @@ public class Coupon extends BaseEntity {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String getRedeemerEmail() {
+        return redeemerEmail;
+    }
+
+    public void setRedeemerEmail(String redeemerEmail) {
+        this.redeemerEmail = redeemerEmail;
     }
 
 

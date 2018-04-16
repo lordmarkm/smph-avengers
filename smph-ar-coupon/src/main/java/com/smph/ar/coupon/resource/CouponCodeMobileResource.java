@@ -28,7 +28,7 @@ public class CouponCodeMobileResource {
         LOG.debug("Coupon code request received. request={}", request);
         RequestCouponCodeResponse response = new RequestCouponCodeResponse();
 
-        CouponInfo coupon = couponService.redeem(request.getPromoCode(), request.getUuid());
+        CouponInfo coupon = couponService.redeem(request.getPromoCode(), request.getUuid(), request.getEmail());
         if (null == coupon) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -37,6 +37,7 @@ public class CouponCodeMobileResource {
         response.setUuid(request.getUuid());
         response.setCouponCode(coupon.getCouponCode());
         response.setReward(coupon.getReward());
+        response.setEmail(coupon.getRedeemerEmail());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

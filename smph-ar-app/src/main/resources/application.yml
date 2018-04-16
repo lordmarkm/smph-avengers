@@ -23,11 +23,18 @@ management:
     enabled: false
 
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:ssl/keystore.p12
+    key-store-password: 123qwe
+    key-password: 123qwe
   session:
     timeout: 27000
     cookie:
        max-age: 31536000
+security:
+  require-ssl: true
 
 logging:
   level:

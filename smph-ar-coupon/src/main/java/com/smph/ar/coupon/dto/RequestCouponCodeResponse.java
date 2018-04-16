@@ -4,6 +4,7 @@ public class RequestCouponCodeResponse {
 
     private String promoCode;
     private String uuid;
+    private String email;
     private String couponCode;
     private String reward;
 
@@ -30,6 +31,12 @@ public class RequestCouponCodeResponse {
     }
     public void setReward(String reward) {
         this.reward = reward;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

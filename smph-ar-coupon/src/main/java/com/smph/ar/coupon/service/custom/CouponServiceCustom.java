@@ -9,7 +9,7 @@ import com.smph.ar.coupon.model.Coupon;
 
 public interface CouponServiceCustom extends MyntJpaServiceCustom<Coupon, CouponInfo> {
 
-    public CouponInfo redeem(String promoCode, String uuid);
+    public CouponInfo redeem(String promoCode, String uuid, String email);
     public DashboardStats dashboardStats();
     public String[] addCouponCodes(MultipartFile csv);
 

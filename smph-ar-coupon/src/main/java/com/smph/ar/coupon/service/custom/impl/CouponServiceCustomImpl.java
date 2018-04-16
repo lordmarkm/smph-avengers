@@ -34,7 +34,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
     private static final Logger LOG = LoggerFactory.getLogger(CouponServiceCustomImpl.class);
 
     @Override
-    public CouponInfo redeem(String promoCode, String uuid) {
+    public CouponInfo redeem(String promoCode, String uuid, String email) {
         List<Coupon> redeemed = (List<Coupon>) repo.findAll(coupon.promoCode.eq(promoCode).and(coupon.redeemerUuid.eq(uuid)));
         if (redeemed.size() > 0) {
             Coupon oldCoupon = Iterables.getFirst(redeemed, null);
@@ -54,6 +54,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
             Coupon redeemedCoupon = Iterables.getFirst(results.getContent(), null);
             redeemedCoupon.setStatus(REDEEMED);
             redeemedCoupon.setRedeemerUuid(uuid);
+            redeemedCoupon.setRedeemerEmail(email);
             return toDto(redeemedCoupon);
         }
     }

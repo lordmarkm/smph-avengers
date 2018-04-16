@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - "8085:80"
+    container_name: nginx_test_lol
+    command: /bin/bash -c "nginx -g 'daemon off;'"

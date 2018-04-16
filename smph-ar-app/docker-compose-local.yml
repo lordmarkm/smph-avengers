@@ -3,8 +3,16 @@ services:
   sm-ar:
     image: exist/sm-ar-avengers:1.0
     ports:
-    - "80:8080"
+    - "443:8443"
     container_name: sm-ar-avengers
     volumes:
     - "./log:/log"
     - "./db:/db"
+  nginx:
+    image: nginx:latest
+    ports:
+    - "8085:80"
+    container_name: nginx_test_local
+    command: /bin/bash -c "nginx -g 'daemon off;'"
+    links:
+    - sm-ar

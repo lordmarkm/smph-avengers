@@ -8,6 +8,7 @@ public class CouponInfo extends BaseInfo {
     private String couponCode;
     private String promoCode;
     private String redeemerUuid;
+    private String redeemerEmail;
     private RedemptionStatus status = RedemptionStatus.VALID;
     private String reward;
     private int priority;
@@ -47,6 +48,12 @@ public class CouponInfo extends BaseInfo {
     }
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+    public String getRedeemerEmail() {
+        return redeemerEmail;
+    }
+    public void setRedeemerEmail(String redeemerEmail) {
+        this.redeemerEmail = redeemerEmail;
     }
 
 }
