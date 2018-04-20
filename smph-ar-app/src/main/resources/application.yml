@@ -17,12 +17,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  h2:
-    console:
-      enabled: true
-      path: /db
-      settings:
-        web-allow-others: true
+  #h2:
+  #  console:
+  #    enabled: true
+  #    path: /db
+  #    settings:
+  #      web-allow-others: true
 
 management:
   security:

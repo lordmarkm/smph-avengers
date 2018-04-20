@@ -1,0 +1,35 @@
+#A. Install Docker
+Note: These instructions are for Ubuntu 16.04. Instructions for Docker installation on other platforms can be found
+here: https://docs.docker.com/install/
+
+1. sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+2. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+3. sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+4. sudo apt-get update
+5. sudo apt-get install docker-ce
+6. sudo usermod -aG docker <Ubuntu username>
+7. logout of the ubuntu instance completely, then log back in
+8. docker -v (Expected output: Docker version 18.03.0-ce, build 0520e24)
+
+#B. Install Docker compose
+
+1. sudo apt-get install docker-compose
+2. docker-compose -v (Expected output: docker-compose version 1.8.0, build unknown)
+
+#C. Install NGINX (This will redirect http:// traffic to https://)
+1. sudo apt-get install nginx
+2. Replace the contents of the file /etc/nginx/nginx.conf with the attached nginx.conf file
+3. sudo service nginx restart
+
+#D Install mysql
+1. sudo apt-get install mysql-server
+
+#D. Copy the attached configuration files
+1. Open the attached docker-compose and replace all instances of "markbbmartinez" with <Ubuntu username>
+2. Copy docker-compose.yml into /home/<Ubuntu username>/dist
+3. Copy create_schema.sql into /home/<Ubuntu username>/dist
+ 
+1. cd ~/dist
+2. docker-compose up -d
+3. tail -f log/sm_ar.log
+
