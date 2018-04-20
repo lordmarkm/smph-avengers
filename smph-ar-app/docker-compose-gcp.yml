@@ -1,10 +1,23 @@
-version: '3.3'
+version: '2'
 services:
   sm-ar:
     image: exist/sm-ar-avengers:1.0
+    depends_on:
+    - "mysql"
+    restart: always
     ports:
     - "443:8443"
     container_name: sm-ar-avengers
     volumes:
-    - "/home/mbmartinez/dist/log:/log"
-    - "/home/mbmartinez/dist/db:/db"
+    - "/home/markbbmartinez/dist/log:/log"
+    - "/home/markbbmartinez/dist/db:/db"
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123qwe
+    ports:
+    - "3306:3306"
+    volumes:
+    - "/home/markbbmartinez/dist/mysql:/var/lib/mysql"
+    - "/home/markbbmartinez/dist/create-schema.sql:/docker-entrypoint-initdb.d/create-schema.sql:ro"

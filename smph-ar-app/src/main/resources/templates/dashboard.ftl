@@ -45,7 +45,9 @@
           <th>${dashboard.couponCodeTotal}
         </tr>
       </table>
+      <!-- 
       <a href="/db" class="btn btn-primary mb-5">View all</a>
+      -->
     </div>
     </div>
     <!-- end first panel -->

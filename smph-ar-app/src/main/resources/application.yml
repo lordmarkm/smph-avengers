@@ -3,11 +3,17 @@ endpoints:
     enabled: true
 
 spring:
+  #Commented out config is for H2 database implementation
+  #datasource:
+  #  url: jdbc:h2:file:./db/h2-smph-ar
+  #  username: sa
+  #  password:
+  #  driver-class-name: org.h2.Driver
   datasource:
-    url: jdbc:h2:file:./db/h2-smph-ar
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost/smph_ar
+    username: root
+    password: 123qwe
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
