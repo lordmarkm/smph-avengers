@@ -31,7 +31,7 @@ services:
   nginx:
     image: nginx:1.10.3
     ports:
-    - "8085:80"
+    - "80:80"
     volumes:
     - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
     command: [nginx-debug, '-g', 'daemon off;']
