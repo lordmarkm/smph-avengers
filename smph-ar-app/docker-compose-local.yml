@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 services:
   sm-ar:
     image: exist/sm-ar-avengers:1.0
@@ -9,7 +9,7 @@ services:
     - "443:8443"
     environment:
       DATABASE_HOST: mysql_avengers
-      DATABASE_USER: smph_user #root will not work here - https://github.com/docker-library/mysql/issues/241
+      DATABASE_USER: smph_user
       DATABASE_PASSWORD: 123qwe
       DATABASE_NAME: smph_ar
       DATABASE_PORT: 3306
@@ -26,7 +26,6 @@ services:
       MYSQL_DATABASE: smph_ar
       MYSQL_USER: smph_user
       MYSQL_PASSWORD: 123qwe
-      MYSQL_ROOT_HOST: '%'
     volumes:
     - db_data:/var/lib/mysql
 volumes:

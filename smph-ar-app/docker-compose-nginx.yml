@@ -1,8 +1,9 @@
 version: '3.3'
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1.10.3
     ports:
     - "8085:80"
-    container_name: nginx_test_lol
+    volumes:
+    - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
     command: /bin/bash -c "nginx -g 'daemon off;'"
