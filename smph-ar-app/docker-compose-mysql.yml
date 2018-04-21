@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+    - "3306"
+    container_name: msyql-sm-ar-avengers
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123qwe
+      MYSQL_DATABASE: smph_ar
+    volumes:
+    - db_data:/var/lib/mysql
+volumes:
+  db_data:
