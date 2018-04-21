@@ -6,4 +6,4 @@ services:
     - "8085:80"
     volumes:
     - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
-    command: /bin/bash -c "nginx -g 'daemon off;'"
+    command: [nginx-debug, '-g', 'daemon off;']
