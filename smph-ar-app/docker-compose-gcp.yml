@@ -3,24 +3,18 @@ services:
   sm-ar:
     image: exist/sm-ar-avengers:1.0
     depends_on:
-    - "mysql"
-    networks:
-    - smph
+    - "mysql_avengers"
     restart: always
     ports:
     - "443:8443"
-    container_name: sm-ar-avengers
     volumes:
-    - "/home/markbbmartinez/dist/log:/log"
-    - "/home/markbbmartinez/dist/db:/db"
-  mysql:
+    - "/home/markbbmartinez/mysql-test/log:/log"
+    - "/home/markbbmartinez/mysql-test/application.yml:/application.yml"
+  mysql_avengers:
     image: mysql:5.7
     restart: always
-    networks:
-    - smph
     ports:
     - "3306"
-    container_name: msyql-sm-ar-avengers
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123qwe
@@ -29,5 +23,3 @@ services:
     - db_data:/var/lib/mysql
 volumes:
   db_data:
-networks:
-  smph:

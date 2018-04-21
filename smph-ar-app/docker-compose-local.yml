@@ -1,33 +1,33 @@
-version: '3.3'
+version: '2'
 services:
   sm-ar:
     image: exist/sm-ar-avengers:1.0
     depends_on:
-    - "mysql"
-    networks:
-    - smph
+    - "mysql_avengers"
     restart: 'no'
     ports:
     - "443:8443"
-    container_name: sm-ar-avengers
+    environment:
+      DATABASE_HOST: mysql_avengers
+      DATABASE_USER: smph_user #root will not work here - https://github.com/docker-library/mysql/issues/241
+      DATABASE_PASSWORD: 123qwe
+      DATABASE_NAME: smph_ar
+      DATABASE_PORT: 3306
     volumes:
     - "./log:/log"
-    - "./db:/db"
-  mysql:
+  mysql_avengers:
     image: mysql:5.7
-    restart: 'always'
-    networks:
-    - smph
+    restart: always
     ports:
     - "3306"
-    container_name: msyql-sm-ar-avengers
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123qwe
       MYSQL_DATABASE: smph_ar
+      MYSQL_USER: smph_user
+      MYSQL_PASSWORD: 123qwe
+      MYSQL_ROOT_HOST: '%'
     volumes:
     - db_data:/var/lib/mysql
 volumes:
   db_data:
-networks:
-  smph:
