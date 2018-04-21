@@ -1,9 +1,12 @@
 version: '3.3'
 services:
   sm-ar:
-    depends_on:
-    - mysql
     image: exist/sm-ar-avengers:1.0
+    depends_on:
+    - "mysql"
+    networks:
+    - smph
+    restart: 'no'
     ports:
     - "443:8443"
     container_name: sm-ar-avengers
@@ -12,16 +15,19 @@ services:
     - "./db:/db"
   mysql:
     image: mysql:5.7
+    restart: 'always'
+    networks:
+    - smph
     ports:
-    - "3307:3306"
+    - "3306"
     container_name: msyql-sm-ar-avengers
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123qwe
       MYSQL_DATABASE: smph_ar
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 123qwe
     volumes:
     - db_data:/var/lib/mysql
 volumes:
   db_data:
+networks:
+  smph:

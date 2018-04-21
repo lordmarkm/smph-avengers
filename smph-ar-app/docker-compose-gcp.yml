@@ -4,6 +4,8 @@ services:
     image: exist/sm-ar-avengers:1.0
     depends_on:
     - "mysql"
+    networks:
+    - smph
     restart: always
     ports:
     - "443:8443"
@@ -12,12 +14,20 @@ services:
     - "/home/markbbmartinez/dist/log:/log"
     - "/home/markbbmartinez/dist/db:/db"
   mysql:
-    image: mysql
+    image: mysql:5.7
+    restart: always
+    networks:
+    - smph
+    ports:
+    - "3306"
+    container_name: msyql-sm-ar-avengers
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123qwe
-    ports:
-    - "3306:3306"
+      MYSQL_DATABASE: smph_ar
     volumes:
-    - "/home/markbbmartinez/dist/mysql:/var/lib/mysql"
-    - "/home/markbbmartinez/dist/create-schema.sql:/docker-entrypoint-initdb.d/create-schema.sql:ro"
+    - db_data:/var/lib/mysql
+volumes:
+  db_data:
+networks:
+  smph:
