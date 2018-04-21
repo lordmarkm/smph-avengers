@@ -28,5 +28,12 @@ services:
       MYSQL_PASSWORD: 123qwe
     volumes:
     - db_data:/var/lib/mysql
+  nginx:
+    image: nginx:1.10.3
+    ports:
+    - "8085:80"
+    volumes:
+    - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
+    command: [nginx-debug, '-g', 'daemon off;']
 volumes:
   db_data:
