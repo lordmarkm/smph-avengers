@@ -35,9 +35,11 @@ public class PromoPointsMobileResource {
     public ResponseEntity<PromoPointsInfo> put(@RequestParam String customerCode,
             @RequestParam DeviceType deviceType,
             @RequestParam String promoCode,
-            @RequestParam @Min(1) @Max(1000) long addedPoints) {
-        LOG.info("PromoPointsMobileResource::put({}, {}, {}, {})", customerCode, deviceType, promoCode, addedPoints);
-        return service.addPoints(customerCode, deviceType, promoCode, addedPoints)
+            @RequestParam @Min(0) @Max(1000) long addedPoints,
+            @RequestParam @Min(0) @Max(1000) long addedSecondaryPoints) {
+        LOG.info("PromoPointsMobileResource::put({}, {}, {}, {}, {})", customerCode, deviceType, promoCode, addedPoints,
+                addedSecondaryPoints);
+        return service.addPoints(customerCode, deviceType, promoCode, addedPoints, addedSecondaryPoints)
                 .map(p -> new ResponseEntity<>(p, OK))
 
                 //404 when service returns empty optional, but this never happens

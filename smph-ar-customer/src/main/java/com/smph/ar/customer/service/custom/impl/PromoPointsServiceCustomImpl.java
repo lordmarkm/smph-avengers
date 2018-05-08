@@ -22,12 +22,14 @@ public class PromoPointsServiceCustomImpl extends MyntJpaServiceCustomImpl<Promo
     private CustomerService customerService;
 
     @Override
-    public Optional<PromoPointsInfo> addPoints(String customerCode, DeviceType deviceType, String promoCode, long additionalPoints) {
+    public Optional<PromoPointsInfo> addPoints(String customerCode, DeviceType deviceType, String promoCode, long addedPoints,
+            long addedSecondaryPoints) {
 
         Optional<PromoPoints> promoPoints = repo.findByCustomerCodeAndPromoCode(customerCode, promoCode);
         if (promoPoints.isPresent()) {
             PromoPoints existing = promoPoints.get();
-            existing.setPoints(existing.getPoints() + additionalPoints);
+            existing.setPoints(existing.getPoints() + addedPoints);
+            existing.setSecondaryPoints(existing.getSecondaryPoints() + addedSecondaryPoints);
             return Optional.of(toDto(existing));
         } else {
             Customer customer = customerService.findByCode(customerCode)
@@ -37,7 +39,8 @@ public class PromoPointsServiceCustomImpl extends MyntJpaServiceCustomImpl<Promo
             PromoPoints newRecord = new PromoPoints();
             newRecord.setCustomer(customer);
             newRecord.setPromoCode(promoCode);
-            newRecord.setPoints(additionalPoints);
+            newRecord.setPoints(addedPoints);
+            newRecord.setSecondaryPoints(addedSecondaryPoints);
             return Optional.of(toDto(repo.save(newRecord)));
         }
 

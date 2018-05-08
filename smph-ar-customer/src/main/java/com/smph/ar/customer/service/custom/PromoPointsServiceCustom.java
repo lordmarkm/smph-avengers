@@ -13,7 +13,8 @@ import com.smph.ar.shared.enums.DeviceType;
  */
 public interface PromoPointsServiceCustom extends MyntJpaServiceCustom<PromoPoints, PromoPointsInfo> {
 
-    Optional<PromoPointsInfo> addPoints(String customerCode, DeviceType deviceType, String promoCode, long additionalPoints);
+    Optional<PromoPointsInfo> addPoints(String customerCode, DeviceType deviceType, String promoCode,
+            long addedPoints, long addedSecondaryPoints);
     Optional<PromoPointsInfo> getPoints(String customerCode, DeviceType deviceType, String promoCode);
 
 }

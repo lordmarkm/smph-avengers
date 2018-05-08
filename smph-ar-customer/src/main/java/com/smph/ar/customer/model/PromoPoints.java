@@ -18,7 +18,10 @@ public class PromoPoints extends BaseEntity {
     private String promoCode;
 
     @Column(name = "points", nullable = false)
-    private long points;
+    private long points = 0;
+
+    @Column(name = "secondary_points")
+    private long secondaryPoints = 0;
 
     public Customer getCustomer() {
         return customer;
@@ -42,6 +45,14 @@ public class PromoPoints extends BaseEntity {
 
     public void setPoints(long points) {
         this.points = points;
+    }
+
+    public long getSecondaryPoints() {
+        return secondaryPoints;
+    }
+
+    public void setSecondaryPoints(long secondaryPoints) {
+        this.secondaryPoints = secondaryPoints;
     }
 
 }

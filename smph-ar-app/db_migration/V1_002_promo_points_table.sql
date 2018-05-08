@@ -7,6 +7,7 @@ CREATE TABLE `promo_points` (
   `updated_date` datetime DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `points` bigint(20) NOT NULL,
+  `secondary_points` bigint(20) DEFAULT 0,
   `promo_code` varchar(255) NOT NULL,
   `customer_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
