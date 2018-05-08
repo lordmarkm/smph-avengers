@@ -29,10 +29,11 @@ public class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
+                .csrf().disable()
                 .antMatcher("/mobile/**")
-                .authorizeRequests()
-                    .anyRequest().hasRole("MOBILE")
-                    .and()
+                    .authorizeRequests()
+                        .anyRequest().hasRole("MOBILE")
+                        .and()
                 .httpBasic();
         }
     }
@@ -65,13 +66,13 @@ public class SecurityConfig {
                     .antMatchers("/db/**").hasRole("ADMIN")
 
                     //this one is for the .ssl verification, can comment out/delete when that's done
-                    .antMatchers("/.well-known/**").permitAll()
+                    //.antMatchers("/.well-known/**").permitAll()
 
-                    .antMatchers("/**").authenticated()
+                    .antMatchers("/**").authenticated();
                 //this stuff for the h2 console
-                .and()
-                    .headers()
-                    .frameOptions().sameOrigin();
+                //.and()
+                //    .headers()
+                //    .frameOptions().sameOrigin();
                 //end of h2 stuff
         }
     }

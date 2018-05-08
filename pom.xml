@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>smph-ar</groupId>
   <artifactId>smph-ar</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <packaging>pom</packaging>
   <name>SMPH AR</name>
 
@@ -24,6 +24,8 @@
     <module>smph-ar-app</module>
     <module>smph-ar-coupon</module>
     <module>smph-ar-security</module>
+    <module>smph-ar-customer</module>
+    <module>smph-ar-shared</module>
   </modules>
 
 </project>

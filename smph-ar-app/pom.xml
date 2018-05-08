@@ -4,7 +4,7 @@
   <parent>
     <groupId>smph-ar</groupId>
     <artifactId>smph-ar</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
   </parent>
   <artifactId>smph-ar-app</artifactId>
   <name>SMPH AR :: App</name>
@@ -23,6 +23,13 @@
       <artifactId>spring-boot-starter-freemarker</artifactId>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+
     <dependency>
       <groupId>smph-ar</groupId>
       <artifactId>smph-ar-security</artifactId>
@@ -33,18 +40,19 @@
       <artifactId>smph-ar-coupon</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>smph-ar</groupId>
+      <artifactId>smph-ar-customer</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.7</version>
     </dependency>
-    <!-- 
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-    -->
+    <!-- <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+      </dependency> -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>

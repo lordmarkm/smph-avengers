@@ -16,7 +16,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //This is for SSL verification - comment out/delete once SSL certificate is obtained
-        registry.addResourceHandler("/.well-known/acme-challenge/**").addResourceLocations("classpath:static/ssl/");
+        //registry.addResourceHandler("/.well-known/acme-challenge/**").addResourceLocations("classpath:static/ssl/");
     }
 
 }

@@ -8,14 +8,18 @@ import static com.smph.ar.coupon.model.RedemptionStatus.VALID;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.mynt.core.jpa.service.MyntJpaServiceCustomImpl;
@@ -27,11 +31,20 @@ import com.smph.ar.coupon.model.Coupon;
 import com.smph.ar.coupon.model.RedemptionStatus;
 import com.smph.ar.coupon.service.CouponService;
 import com.smph.ar.coupon.service.custom.CouponServiceCustom;
+import com.smph.ar.customer.model.PromoPoints;
+import com.smph.ar.customer.service.PromoPointsService;
+import com.smph.ar.shared.exception.NotEnoughPointsException;
+import com.smph.ar.shared.exception.NotFoundException;
 
 public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, CouponInfo, CouponService>
     implements CouponServiceCustom {
 
     private static final Logger LOG = LoggerFactory.getLogger(CouponServiceCustomImpl.class);
+    private static final Map<String, Long> POINTS_MAP = ImmutableMap.of(
+            "deadpool", 60L);
+
+    @Autowired
+    private PromoPointsService promoPointsService;
 
     @Override
     public CouponInfo redeem(String promoCode, String uuid, String email) {
@@ -41,6 +54,9 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
             LOG.warn("Duplicate redemption attempt. Returning old coupon code. code={}, promoCode={}, uuid={}", oldCoupon.getCouponCode(), promoCode, uuid);
             return toDto(oldCoupon);
         }
+
+        //Check that the redeemer has accumulated enough points
+        validatePoints(promoCode, uuid);
 
         BooleanExpression predicate = coupon.status.eq(VALID)
                 .and(coupon.promoCode.eq(promoCode));
@@ -56,6 +72,21 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
             redeemedCoupon.setRedeemerUuid(uuid);
             redeemedCoupon.setRedeemerEmail(email);
             return toDto(redeemedCoupon);
+        }
+    }
+
+    private void validatePoints(String promoCode, String customerCode) {
+        Long minimumPoints = POINTS_MAP.get(promoCode);
+        if (null == minimumPoints) {
+            return;
+        }
+        Optional<PromoPoints> promoPoints = promoPointsService.findByCustomerCodeAndPromoCode(customerCode, promoCode);
+
+        //Not enough points
+        if (promoPoints.isPresent() && promoPoints.get().getPoints() < minimumPoints) {
+            throw new NotEnoughPointsException("Not enough points");
+        } else if (!promoPoints.isPresent()) {
+            throw new NotFoundException("No points found");
         }
     }
 
@@ -94,7 +125,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
                 newCoupon.setReward(nextLine[1].trim());
                 newCoupon.setPriority(Integer.parseInt(nextLine[2].trim()));
                 newCoupon.setStatus(RedemptionStatus.VALID);
-                newCoupon.setPromoCode("avengers");
+                newCoupon.setPromoCode(nextLine[3].trim());
 
                 newCoupons.add(newCoupon);
             }

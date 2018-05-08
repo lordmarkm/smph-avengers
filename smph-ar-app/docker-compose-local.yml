@@ -1,12 +1,12 @@
 version: '3.3'
 services:
   sm-ar:
-    image: exist/sm-ar-avengers:1.0
+    image: exist/sm-ar-avengers:1.1
     depends_on:
     - "mysql_avengers"
     restart: 'no'
     ports:
-    - "443:8443"
+    - "80:8443"
     environment:
       DATABASE_HOST: mysql_avengers
       DATABASE_USER: smph_user
@@ -16,24 +16,24 @@ services:
     volumes:
     - "./log:/log"
   mysql_avengers:
-    image: mysql:5.7
+    image: vsamov/mysql-5.1.73
     restart: always
     ports:
     - "3306"
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 123qwe
       MYSQL_DATABASE: smph_ar
       MYSQL_USER: smph_user
       MYSQL_PASSWORD: 123qwe
     volumes:
     - db_data:/var/lib/mysql
-  nginx:
-    image: nginx:1.10.3
-    ports:
-    - "80:80"
-    volumes:
-    - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
-    command: [nginx-debug, '-g', 'daemon off;']
+  #Uncomment when using SSL
+  #nginx:
+  #  image: nginx:1.10.3
+  #  ports:
+  #  - "80:80"
+  #  volumes:
+  #  - "./nginx-conf/avengers.conf:/etc/nginx/nginx.conf"
+  #  command: [nginx-debug, '-g', 'daemon off;']
 volumes:
   db_data:

@@ -30,17 +30,19 @@ management:
 
 server:
   port: 8443
-  ssl:
-    enabled: true
-    key-store: classpath:ssl/keystore.p12
-    key-store-password: 123qwe
-    key-password: 123qwe
+  #uncomment when using SSL
+  #ssl:
+  #  enabled: true
+  #  key-store: classpath:ssl/keystore.p12
+  #  key-store-password: 123qwe
+  #  key-password: 123qwe
   session:
     timeout: 27000
     cookie:
        max-age: 31536000
-security:
-  require-ssl: true
+#uncomment when using SSL
+#security:
+#  require-ssl: true
 
 logging:
   level:
