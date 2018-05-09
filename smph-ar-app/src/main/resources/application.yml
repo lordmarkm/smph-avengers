@@ -29,8 +29,10 @@ management:
     enabled: false
 
 server:
+  #comment out when using SSL
   port: 8080
   #uncomment when using SSL
+  #port: 8443
   #ssl:
   #  enabled: true
   #  key-store: classpath:ssl/keystore.p12

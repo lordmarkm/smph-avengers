@@ -38,12 +38,12 @@
         <tr>
           <td rowspan="2">${promo.promoCode}
           <td>Android
-          <td>${promo.androidUsers}
-          <td>${promo.androidPoints}
+          <td>${promo.androidUsers!"0"}
+          <td>${promo.androidPoints!"0"}
         </tr>
         <tr>
           <td>IOS
-          <td>${(promo.iosUsers)!"0"}
+          <td>${promo.iosUsers!"0"}
           <td>${promo.iosPoints!"0"}
         </tr>
         </#list>
@@ -88,14 +88,14 @@
     <p class="card-text">File content should look like this:
     <pre>
     <code>
-    Samplecode1234,Movie pass,0
-    Samplecode4546,Movie pass,0
-    Samplecode2222,Avengers mug,1
-    Samplecode1234,Free poster,2
+    Samplecode1234,Movie pass,0,deadpool
+    Samplecode4546,Movie pass,0,deadpool
+    Samplecode2222,Avengers mug,1,avengers
+    Samplecode1234,Free poster,2,avengers
     </code>
     </pre>
     <p>Where the first element of the comma separated values is the coupon code, the second element is the reward, and the third element is the reward priority.
-    Lower reward priorities will be redeemed first.
+    Lower reward priorities will be redeemed first. The fourth element is the promo code. This must be consistent with the promo code used by the mobile apps.
     <div class="card-text">
       <form method="post" enctype="multipart/form-data" action="/coupon-code/upload">
         <div class="form-group">
