@@ -1,0 +1,1 @@
+alter table coupon modify column coupon_code varchar(255) not null unique;

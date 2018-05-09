@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.mynt.core.jpa.service.MyntJpaServiceCustomImpl;
 import com.opencsv.CSVReader;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -108,7 +109,7 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
         try {
             List<String> results = Lists.newArrayList();
             reader = new CSVReader(new InputStreamReader(csv.getInputStream()));
-            List<Coupon> newCoupons = Lists.newArrayList();
+            Map<String, Coupon> newCoupons = Maps.newHashMap();
 
             String[] nextLine;
 
@@ -118,6 +119,8 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
                 if (repo.findByCouponCode(couponCode).isPresent()) {
                     results.add("Coupon code " + couponCode + " already exists. Ignored.");
                     continue;
+                } else if (newCoupons.get(couponCode) != null) {
+                    results.add("Coupon code " + couponCode + " at line " + line + " is a duplicate. Ignored");
                 }
 
                 Coupon newCoupon = new Coupon();
@@ -127,11 +130,11 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
                 newCoupon.setStatus(RedemptionStatus.VALID);
                 newCoupon.setPromoCode(nextLine[3].trim());
 
-                newCoupons.add(newCoupon);
+                newCoupons.put(couponCode, newCoupon);
             }
 
             results.add("Success. New coupon codes: " + newCoupons.size());
-            repo.save(newCoupons);
+            repo.save(newCoupons.values());
 
             return results.toArray(new String[] {});
         } catch (Exception e) {

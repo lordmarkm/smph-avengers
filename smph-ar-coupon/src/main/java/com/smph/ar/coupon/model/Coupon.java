@@ -12,7 +12,7 @@ public class Coupon extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "coupon_code", nullable = false, updatable = false)
+    @Column(name = "coupon_code", nullable = false, updatable = false, unique = true)
     private String couponCode;
 
     @Column(name = "promo_code", nullable = false, updatable = false)
