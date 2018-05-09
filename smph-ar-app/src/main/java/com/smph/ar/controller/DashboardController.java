@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smph.ar.coupon.service.CouponService;
+import com.smph.ar.customer.service.PromoPointsService;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -18,10 +19,14 @@ public class DashboardController {
 
     @Autowired
     private CouponService couponService;
-    
+
+    @Autowired
+    private PromoPointsService promoPointsService;
+
     @GetMapping
     public String dashboard(Model model) {
         model.addAttribute("dashboard", couponService.dashboardStats());
+        model.addAttribute("promos", promoPointsService.dashboardStats());
 
         LOG.debug("Dashboard! model={}", model);
         return "dashboard";

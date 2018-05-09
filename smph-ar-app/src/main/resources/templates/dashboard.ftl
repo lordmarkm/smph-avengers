@@ -25,7 +25,38 @@
     </#if>
 
     <div class="card col-12 mt-2">
-    <h4 class="card-title mt-1">Hello! These are the coupon code usage statistics</h4>
+    <h4 class="card-title mt-1">Hello! These are the promo points statistics</h4>
+    <div class="card-text">
+      <table class="table table-striped">
+        <tr>
+          <th>Promo
+          <th>Platform
+          <th>Users
+          <th>Points
+        </tr>
+        <#list promos.promos as promo>
+        <tr>
+          <td rowspan="2">${promo.promoCode}
+          <td>Android
+          <td>${promo.androidUsers}
+          <td>${promo.androidPoints}
+        </tr>
+        <tr>
+          <td>IOS
+          <td>${(promo.iosUsers)!"0"}
+          <td>${promo.iosPoints!"0"}
+        </tr>
+        </#list>
+      </table>
+      <!-- 
+      <a href="/db" class="btn btn-primary mb-5">View all</a>
+      -->
+    </div>
+    </div>
+    <!-- end promo codespanel -->
+
+    <div class="card col-12 mt-2">
+    <h4 class="card-title mt-1">These are the coupon code usage statistics</h4>
     <div class="card-text">
       <table class="table table-striped">
         <tr>

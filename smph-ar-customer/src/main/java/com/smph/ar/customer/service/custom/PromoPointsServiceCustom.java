@@ -3,6 +3,7 @@ package com.smph.ar.customer.service.custom;
 import java.util.Optional;
 
 import com.mynt.core.jpa.service.MyntJpaServiceCustom;
+import com.smph.ar.customer.dto.PromoPointsDashboardStats;
 import com.smph.ar.customer.dto.PromoPointsInfo;
 import com.smph.ar.customer.model.PromoPoints;
 import com.smph.ar.shared.enums.DeviceType;
@@ -16,5 +17,6 @@ public interface PromoPointsServiceCustom extends MyntJpaServiceCustom<PromoPoin
     Optional<PromoPointsInfo> addPoints(String customerCode, DeviceType deviceType, String promoCode,
             long addedPoints, long addedSecondaryPoints);
     Optional<PromoPointsInfo> getPoints(String customerCode, DeviceType deviceType, String promoCode);
+    PromoPointsDashboardStats dashboardStats();
 
 }
