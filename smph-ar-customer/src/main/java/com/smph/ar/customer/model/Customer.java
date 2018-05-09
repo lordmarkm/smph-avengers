@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.hibernate.annotations.Type;
+import org.springframework.core.style.ToStringCreator;
 
 import com.mynt.core.jpa.model.BaseEntity;
 
@@ -15,7 +16,7 @@ public class Customer extends BaseEntity {
     /**
      * This ID provided by mobile app
      */
-    @Column(name = "customer_code", nullable = false)
+    @Column(name = "customer_code", nullable = false, unique = true)
     private String code;
 
     @Column(name = "android_user")
@@ -25,6 +26,14 @@ public class Customer extends BaseEntity {
     @Column(name = "ios_user")
     @Type(type = "yes_no")
     private boolean iosUser;
+
+    @Override
+    public String toString() {
+        return new ToStringCreator(this)
+                .append("id", this.getId())
+                .append("code", code)
+                .toString();
+    }
 
     public boolean isAndroidUser() {
         return androidUser;

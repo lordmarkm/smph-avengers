@@ -1,5 +1,7 @@
 package com.smph.ar.customer.service.custom.impl;
 
+import static com.smph.ar.customer.model.QPromoPoints.promoPoints;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.mynt.core.jpa.service.MyntJpaServiceCustomImpl;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -23,12 +24,10 @@ import com.smph.ar.customer.dto.PromoPointsInfo;
 import com.smph.ar.customer.dto.SinglePromoDashboardStats;
 import com.smph.ar.customer.model.Customer;
 import com.smph.ar.customer.model.PromoPoints;
-import com.smph.ar.customer.model.QPromoPoints;
 import com.smph.ar.customer.service.CustomerService;
 import com.smph.ar.customer.service.PromoPointsService;
 import com.smph.ar.customer.service.custom.PromoPointsServiceCustom;
 import com.smph.ar.shared.enums.DeviceType;
-import static com.smph.ar.customer.model.QPromoPoints.promoPoints;
 
 @Transactional
 public class PromoPointsServiceCustomImpl extends MyntJpaServiceCustomImpl<PromoPoints, PromoPointsInfo, PromoPointsService>
@@ -53,12 +52,13 @@ public class PromoPointsServiceCustomImpl extends MyntJpaServiceCustomImpl<Promo
             existing.setSecondaryPoints(existing.getSecondaryPoints() + addedSecondaryPoints);
             return Optional.of(toDto(existing));
         } else {
-            Customer customer = customerService.findByCode(customerCode)
-                    .map(c -> c)
-                    .orElse(newCustomer(customerCode));
+            Optional<Customer> customerOpt = customerService.findByCode(customerCode);
+            if (!customerOpt.isPresent()) {
+                customerOpt = Optional.of(newCustomer(customerCode));
+            }
 
             PromoPoints newRecord = new PromoPoints();
-            newRecord.setCustomer(customer);
+            newRecord.setCustomer(customerOpt.get());
             newRecord.setPromoCode(promoCode);
             newRecord.setPoints(addedPoints);
             newRecord.setSecondaryPoints(addedSecondaryPoints);

@@ -6,4 +6,5 @@
     <version>1.1</version>
   </parent>
   <artifactId>smph-ar-shared</artifactId>
+  <name>SMPH AR :: Shared</name>
 </project>

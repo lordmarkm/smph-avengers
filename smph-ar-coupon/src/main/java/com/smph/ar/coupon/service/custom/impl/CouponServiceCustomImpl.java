@@ -116,11 +116,11 @@ public class CouponServiceCustomImpl extends MyntJpaServiceCustomImpl<Coupon, Co
             while ((nextLine = reader.readNext()) != null) {
                 line++;
                 String couponCode = nextLine[0].trim();
-                if (repo.findByCouponCode(couponCode).isPresent()) {
+                if (newCoupons.get(couponCode) != null) {
+                    results.add("Coupon code " + couponCode + " at line " + line + " is a duplicate. Ignored");
+                } else if (repo.findByCouponCode(couponCode).isPresent()) {
                     results.add("Coupon code " + couponCode + " already exists. Ignored.");
                     continue;
-                } else if (newCoupons.get(couponCode) != null) {
-                    results.add("Coupon code " + couponCode + " at line " + line + " is a duplicate. Ignored");
                 }
 
                 Coupon newCoupon = new Coupon();
