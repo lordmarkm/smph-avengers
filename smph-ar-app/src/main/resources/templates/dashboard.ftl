@@ -16,6 +16,10 @@
       <a href="/logout">Logout</a>
     </div>
 
+    <div class="card col-12 text-left mt-2">
+      <a target="_blank" href="/logs">Download logs</a>
+    </div>
+
     <#if msgs??>
     <div class="card col-12 mt-2 text-white bg-success">
       <#list msgs as msg>
